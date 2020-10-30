@@ -29,29 +29,123 @@
     <title>Attestation de déplacement dérogatoire</title>
 </head>
 <body>
-    <header role="banner" class="wrapper">
-        <picture>
-            <source srcset="/MIN_Interieur_RVB_dark.svg" media="(prefers-color-scheme: dark)">
-            <img src="/MIN_Interieur_RVB.svg" alt="Ministère de l'intérieur. Liberté, égalité, fraternité."
-                class="logo" role="presentation" aria-hidden="true">
-        </picture>
+<style>
+  input:valid+span:after {
+    content: '';
+  }
+  .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    height: 34px;
+    user-select: none;
+  }
 
-        <div>
-            <h1 class="flex flex-wrap">
-                <span class="covid-title">
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    color: #212529 !important;
+  }
+
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 34px;
+    width: 96%;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    border: 1px solid #d2d2d2;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+  }
+
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #e2e2e2;
+  }
+
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #0069d9;
+    border: 1px solid #0069d9;
+    color: white;
+  }
+
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h1 span {
+    width: 100%;
+  }
+
+  .choiceMotif .checkmark {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .modifSortie {
+    text-align: right;
+    font-style: italic;
+  }
+  .modifSortie:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .choiceMotif {
+    height: 0;
+    overflow: hidden;
+    margin-top: .5rem;
+  }
+  select {
+    width: 100%;
+    height: 34px;
+  }
+  form {
+    margin: 12px 0 !important;
+  }
+  .class-heuresortie {
+    margin-bottom: .1rem;
+  }
+</style>
+<header role="banner" class="wrapper">
+  <div>
+    <h1 class="flex flex-wrap text-center">
+                <span class="covid-title d-flex align-items-center justify-content-center font-weight-bold">
                     COVID-19
                 </span>
-                <span class="covid-subtitle">
-                  Attestation de déplacement dérogatoire
+      <span class="covid-subtitle font-weight-bold d-flex justify-content-center align-items-center">
+                  Attestation de déplacement dérogatoire pour Vivamedia
                 </span>
-            </h1>
-            <p class="text-desc">
-                En application des mesures générales nécessaires pour faire face à l’épidémie de covid-19 
-                dans le cadre de l’état d’urgence sanitaire
-            </p>
-
-        </div>
-    </header>
+    </h1>
+  </div>
+</header>
     <main role="main">
     <p
         class="alert  alert-danger  d-none"
@@ -59,40 +153,62 @@
         id="alert-facebook"
     ></p>
 
-    <div class="wrapper">
+    <div class="wrapper" style="margin: 30px auto;max-width: 400px;">
+      <h2 class="titre-2 text-center">Remplissez en ligne votre déclaration numérique: </h2>
+      <div class="d-flex justify-content-between mt-4">
+        <select name="covid" id="personChoice">
+          <option value="mathis">Mathis</option>
+          <option value="julien">Julien</option>
+          <option value="naouale">Naouale</option>
+          <option value="mahery">Mahery</option>
+          <option value="delphine">Delphine</option>
+        </select>
+      </div>
         <form id="form-profile" accept-charset="UTF-8"></form>
-        <p class="text-center mt-5">
+      <p class="modifSortie mb-0 mt-2" id="modifSortie">Modifier mon motif de sortie ></p>
+      <!--          <br>-->
+      <!--          <input type="checkbox" id="retourTravail" name="retourTravail" value="retourTravail">-->
+      <!--          <label for="retourTravail">Retour au domicile</label>-->
+
+      <div class="d-flex flex-column choiceMotif">
+        <label class="container">
+          <input type="radio" checked="checked" name="motif">
+          <span class="checkmark" id="travail">Domicile <-> Travail</span>
+        </label>
+        <label class="container">
+          <input type="radio" name="motif">
+          <span class="checkmark" id="achats">Achats de nécessité</span>
+        </label>
+        <label class="container">
+          <input type="radio" name="motif">
+          <span class="checkmark" id="sante">Consultation / Soin</span>
+        </label>
+        <label class="container">
+          <input type="radio" name="motif">
+          <span class="checkmark" id="famille">Motif familial</span>
+        </label>
+        <label class="container">
+          <input type="radio" name="motif">
+          <span class="checkmark" id="handicap">Accompagnement handicap</span>
+        </label>
+        <label class="container">
+          <input type="radio" name="motif">
+          <span class="checkmark" id="sport_animaux">Sport / Animaux</span>
+        </label>
+        <label class="container">
+          <input type="radio" name="motif">
+          <span class="checkmark" id="convocation">Convocation judiciaire / Administratif</span>
+        </label>
+        <label class="container">
+          <input type="radio" name="motif">
+          <span class="checkmark" id="enfants">Enfants</span>
+        </label>
+      </div>
+        <p class="text-center mt-3">
             <button type="button" id="generate-btn" class="btn btn-primary btn-attestation"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>  Générer mon attestation</span></button>
         </p>
-
-        <div class="bg-primary  d-none" id="snackbar">
-            L'attestation est téléchargée sur votre appareil.
-        </div>
     </div>
 
-    <div class="">
-        <p id="footnotes">
-            <span id="footnote1">
-                [1] Les personnes souhaitant bénéficier de l'une de ces exceptions doivent se munir s'il y a lieu, lors de leurs déplacements hors de leur domicile, d'un document leur permettant de justifier que le déplacement considéré entre dans le champ de l'une de ces exceptions.
-            </span><br>
-            <span id="footnote2">
-                [2]  A utiliser par les travailleurs non salariés, lorsqu'ils ne peuvent disposer d'un justificatif de déplacement établi par leur employeur.
-            </span><br>
-            <span id="footnote3">
-                [3] Y compris les acquisitions à titre gratuit (distribution de denrées alimentaires...) et les déplacements liés à la perception de prestations sociales et au retrait d'espèces.
-            </span><br>
-        </p>
-        <p class="github">
-            Le code source de ce service est consultable sur <a href="https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020" class="github-link">GitHub</a>.
-        </p>
-        <p class="label-mi">
-            Ministère de l'Intérieur - DNUM - SDIT
-        </p>
-        <picture class="center">
-          <source srcset="/logo_dnum_dark.svg" media="(prefers-color-scheme: dark)">
-            <img class="center" src="/logo_dnum.svg" alt="logo dnum">
-        </picture>
-    </div>
     </main>
     <footer role="contentinfo" class="main-footer">
         <div class="footer-links">
@@ -112,5 +228,112 @@
     </div>
 
     <script src="./js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+  $('.class-firstname').css('display', 'none');
+  $('.class-lastname').css('display', 'none');
+  $('.class-birthday').css('display', 'none');
+  $('.class-placeofbirth').css('display', 'none');
+  $('.class-address').css('display', 'none');
+  $('.class-city').css('display', 'none');
+  $('.class-zipcode').css('display', 'none');
+  $('.class-datesortie').css('display', 'none');
+  $('#field-firstname').val('Mathis')
+  $('#field-lastname').val('Angibaud')
+  $('#field-birthday').val('17/01/1997')
+  $('#field-placeofbirth').val('Nantes')
+  $('#field-address').val('2 rue Retrou')
+  $('#field-city').val('Asnières-sur-Seine')
+  $('#field-zipcode').val('92600')
+  $('#checkbox-travail').prop("checked", true);
+  
+  $("#personChoice").change(function() {
+    if($("#personChoice").val() === "mathis") {
+      $('#field-firstname').val('Mathis')
+      $('#field-lastname').val('Angibaud')
+      $('#field-birthday').val('17/01/1997')
+      $('#field-placeofbirth').val('Nantes')
+      $('#field-address').val('2 rue Retrou')
+      $('#field-city').val('Asnières-sur-Seine')
+      $('#field-zipcode').val('92600')
+    }
+    if($("#personChoice").val() === "julien") {
+      $('#field-firstname').val('Julien')
+      $('#field-lastname').val('Destieu')
+      $('#field-birthday').val('16/10/1987')
+      $('#field-placeofbirth').val('Neuilly-sur-Seine')
+      $('#field-address').val('62 rue Vasco de Gama')
+      $('#field-city').val('Paris')
+      $('#field-zipcode').val('75015')
+    }
+    if($("#personChoice").val() === "naouale") {
+      $('#field-firstname').val('Naouale')
+      $('#field-lastname').val('Keddi')
+      $('#field-birthday').val('20/04/1982')
+      $('#field-placeofbirth').val('Saint-Denis')
+      $('#field-address').val('14 rue Pablo Neruda')
+      $('#field-city').val('Levallois-Perret')
+      $('#field-zipcode').val('92300')
+    }
+    if($("#personChoice").val() === "mahery") {
+      $('#field-firstname').val('Mahery')
+      $('#field-lastname').val('Andriantseheno')
+      $('#field-birthday').val('01/08/1995')
+      $('#field-placeofbirth').val('Madagascar')
+      $('#field-address').val('42 Boulevard Pierre Mendès')
+      $('#field-city').val('Chelles')
+      $('#field-zipcode').val('77500')
+    }
+    if($("#personChoice").val() === "delphine") {
+      $('#field-firstname').val('Delphine')
+      $('#field-lastname').val('Liu')
+      $('#field-birthday').val('22/06/1996')
+      $('#field-placeofbirth').val('Bondy')
+      $('#field-address').val('1 rue des Etangs')
+      $('#field-city').val('Clamart')
+      $('#field-zipcode').val('92140')
+    }
+  });
+  $('#modifSortie').click(function() {
+    $('.choiceMotif').animate({
+      height: "287px"
+    }, {
+      duration: 350, complete: function () {
+        $(this).css("height", "287px")
+      }
+    });
+  });
+
+  // $('#generate-btn').click(function() {
+  //   if($('#retourTravail').is(':checked')) {
+  //     $('#field-town').val('Levallois-Perret');
+  //   }
+  // });
+
+  $('#travail').click(function() {
+    $('#checkbox-travail').prop("checked", true);
+  });
+  $('#achats').click(function() {
+    $('#checkbox-achats').prop("checked", true);
+  });
+  $('#sante').click(function() {
+    $('#checkbox-sante').prop("checked", true);
+  });
+  $('#famille').click(function() {
+    $('#checkbox-famille').prop("checked", true);
+  });
+  $('#handicap').click(function() {
+    $('#checkbox-handicap').prop("checked", true);
+  });
+  $('#sport_animaux').click(function() {
+    $('#checkbox-sport_animaux').prop("checked", true);
+  });
+  $('#convocation').click(function() {
+    $('#checkbox-convocation').prop("checked", true);
+  });
+  $('#enfants').click(function() {
+    $('#checkbox-enfants').prop("checked", true);
+  });
+</script>
 </body>
 </html>

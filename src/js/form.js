@@ -6,11 +6,6 @@ import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
 
-const createTitle = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
-  const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
-  return [h2, p]
-}
 // createElement('div', { className: 'form-group' })
 
 const createFormGroup = ({
@@ -27,7 +22,7 @@ const createFormGroup = ({
   placeholder = '',
   type = 'text',
 }) => {
-  const formGroup = createElement('div', { className: 'form-group' })
+  const formGroup = createElement('div', { className: `form-group class-${name}` })
   const labelAttrs = {
     for: `field-${name}`,
     id: `field-${name}-label`,
@@ -72,14 +67,14 @@ const createFormGroup = ({
 }
 
 const createReasonField = (reasonData) => {
-  const formReasonAttrs = { className: 'form-checkbox align-items-center' }
+  const formReasonAttrs = { className: 'form-checkbox align-items-center d-none' }
   const formReason = createElement('div', formReasonAttrs)
   const appendToReason = appendTo(formReason)
 
   const id = `checkbox-${reasonData.code}`
   const inputReasonAttrs = {
     className: 'form-check-input',
-    type: 'checkbox',
+    type: 'radio',
     id,
     name: 'field-reason',
     value: reasonData.code,
@@ -102,26 +97,12 @@ const createReasonFieldset = (reasonsData) => {
   const fieldset = createElement('fieldset', fieldsetAttrs)
   const appendToFieldset = appendTo(fieldset)
 
-  const legendAttrs = {
-    className: 'legend titre 3 ',
-    innerHTML: 'Choisissez un motif de déplacement',
-  }
-  const legend = createElement('legend', legendAttrs)
-
   const textAlertAttrs = { className: 'msg-alert hidden', innerHTML: 'Veuillez choisir un motif' }
   const textAlert = createElement('p', textAlertAttrs)
 
-  const textSubscribeReasonAttrs = {
-    innerHTML: `certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé en application des 
-    mesures générales nécessaires pour faire face à l'épidémie de Covid19 dans le cadre de l'état 
-    d'urgence sanitaire <a class="footnote" id="footnote1" href="#footnote1">[1]</a>&nbsp;:`,
-  }
-
-  const textSubscribeReason = createElement('p', textSubscribeReasonAttrs)
-
   const reasonsFields = reasonsData.items.map(createReasonField)
 
-  appendToFieldset([legend, textAlert, textSubscribeReason, ...reasonsFields])
+  appendToFieldset([textAlert, ...reasonsFields])
   // Créer un form-checkbox par motif
   return fieldset
 }
@@ -155,5 +136,5 @@ export function createForm () {
     .find(field => field.key === 'reason')
 
   const reasonFieldset = createReasonFieldset(reasonsData)
-  appendToForm([...createTitle(), ...formFirstPart, reasonFieldset])
+  appendToForm([...formFirstPart, reasonFieldset])
 }
