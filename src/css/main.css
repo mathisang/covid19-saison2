@@ -135,7 +135,7 @@ p {
 
 @media (prefers-color-scheme: dark) {
   p {
-    color: white;
+    color: black;
   }
 }
 
@@ -156,13 +156,13 @@ p {
 
 @media (prefers-color-scheme: dark) {
   #form-profile .form-radio-label .form-check-label {
-    color: #ddd;
+    color: black;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   label {
-    color: white;
+    color: black;
   }
 
   .form-control::placeholder {
@@ -339,7 +339,7 @@ input[type=number] {
 
 @media (prefers-color-scheme: dark) {
   .msg-info {
-    color: white;
+    color: black;
   }
 }
 
@@ -390,7 +390,7 @@ input[type=number] {
 
 @media (prefers-color-scheme: dark) {
   .label-mi {
-    color: white;
+    color: black;
   }
 }
 
@@ -402,7 +402,7 @@ input[type=number] {
 
 @media (prefers-color-scheme: dark) {
   .validity {
-    color: #DDD;
+    color: black;
   }
 }
 
@@ -541,11 +541,11 @@ input[type=number] {
 
 @media (prefers-color-scheme: dark) {
     .titre-3 {
-        color: white;
+        color: black;
     }
 
     .titre-4 {
-        color: white;
+        color: black;
     }
 }
 
