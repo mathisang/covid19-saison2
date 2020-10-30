@@ -162,6 +162,9 @@ p {
 
 @media (prefers-color-scheme: dark) {
   label {
+    color: white;
+  }
+  label.container {
     color: black;
   }
 
